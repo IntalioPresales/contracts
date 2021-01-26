@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contracts Management System</title>
+    <base href="./">
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+
+    <!-- /global stylesheets -->
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/jgrowl.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/anytime.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery_ui/touch.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/uploaders/dropzone.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script type="text/javascript" src="assets/js/pages/datatables_advanced.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- /theme JS files -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-firestore.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script> -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAPOe54ZIpN2F4uDklPbehO-sY4Cn2nECs",
+            authDomain: "contracts-3048a.firebaseapp.com",
+            databaseURL: "https://contracts-3048a.firebaseio.com",
+            projectId: "contracts-3048a",
+            storageBucket: "contracts-3048a.appspot.com",
+            messagingSenderId: "178874374202",
+            appId: "1:178874374202:web:b9b301ff1432824f9c7d03",
+            measurementId: "G-PL9G9FTL9M"
+        };
+        // Initialize Firebase
+        // firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+    </script>
+
+
+    <style>
+        legend {
+            color: #5c68a2;
+            font-weight: 600;
+        }
+
+        .label {
+            margin-bottom: 2px;
+        }
+
+        .fa-bank {
+            font-size: 7em;
+            color: #54647e;
+        }
+
+        .handshake {
+            height: 70px;
+            margin: 0 115px;
+        }
+
+        .party_name {
+            padding-top: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            color: #514949;
+        }
+
+        .party_type {
+            text-align: center;
+            color: #7e7979;
+            font-size: 16px;
+        }
+
+        .contract_info_label {
+            display: inline-block;
+            width: 160px;
+            font-weight: 500;
+        }
+
+        .contract_info_box>div {
+            margin-bottom: 3px;
+        }
+
+        .e-file-preview {
+            min-width: 200px;
+            background: #f2f3f4;
+            border: 1px solid #ccc;
+            padding: 7px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .term-entities>div {
+            padding: 4px 0px;
+            margin: 3px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .term-text {
+            padding: 9px 14px 9px 8px;
+            background: #f4f4f4;
+            border-radius: 3px;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body ng-controller="SampleCtrl">
+
+    <!-- Main navbar -->
+    <div ng-include="'./reusable_components/main_navbar.html'"></div>
+    <!-- /Main navbar -->
+
+    <!-- Second navbar -->
+    <div ng-include="'./reusable_components/second_navbar.html'"></div>
+    <!-- / Second navbar -->
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">New Contract</span> </h4>
+
+                <ul class="breadcrumb breadcrumb-caret position-right">
+                    <li><a href="#">New Contract</a></li>
+                    <li class="active">Form</li>
+                </ul>
+            </div>
+
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+
+
+
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <div class="col-md-8 ">
+
+                    <form class="form-horizontal">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Contract Form</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <fieldset>
+                                    <legend class="text-semibold">
+                                        <i class="icon-collaboration position-left"></i>
+                                        Parties
+                                        <a class="control-arrow" data-toggle="collapse" data-target="#demo1">
+                                            <i class="icon-circle-down2"></i>
+                                        </a>
+                                    </legend>
+
+                                    <div class="collapse in" id="demo1">
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Second party:</label>
+                                            <div class="col-lg-9">
+                                                <select ng-model="party" data-placeholder="Second party" class="select">
+                                                    <option></option>
+                                                    <optgroup label="Government">
+                                                        <option value="MOFA">MOFA</option>
+                                                    </optgroup>
+                                                    <optgroup label="Enteprice">
+                                                        <option value="Facebook">Facebook</option>
+                                                        <option value="Apple">Apple</option>
+                                                        <option value="Microsoft">Microsoft</option>
+                                                        <option value="OneSoft">OneSoft</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group pt-15">
+                                            <label class="col-lg-3 control-label">Consortium:</label>
+                                            <div class="col-lg-9">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input ng-model="consortium" type="checkbox" class="styled">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group pt-5" ng-show="consortium">
+                                            <label class="col-lg-3 control-label"></label>
+                                            <div class="col-lg-9">
+                                                <select  data-placeholder="Second party" multiple="multiple" class="select">
+                                                    <option></option>
+                                                    <optgroup label="Government">
+                                                        <option value="MOFA">MOFA</option>
+                                                    </optgroup>
+                                                    <optgroup label="Enteprice">
+                                                        <option value="Facebook">Facebook</option>
+                                                        <option value="Apple">Apple</option>
+                                                        <option value="Microsoft">Microsoft</option>
+                                                        <option value="OneSoft">OneSoft</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend class="text-semibold">
+                                        <i class="icon-stack3 position-left"></i>
+                                        Contract Information
+                                        <a class="control-arrow" data-toggle="collapse" data-target="#demo2">
+                                            <i class="icon-circle-down2"></i>
+                                        </a>
+                                    </legend>
+
+                                    <div class="collapse in" id="demo2">
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Contract Title:</label>
+                                            <div class="col-lg-9">
+                                                <input ng-model="agreement" type="text" class="form-control" placeholder="Contract Title">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Amount:</label>
+                                            <div class="col-lg-9">
+                                                <input ng-model="amount" type="text" class="form-control" placeholder="Amount">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Effective Date - Expiration Date::</label>
+                                            <div class="col-lg-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                                                    <input ng-model="date_range" type="text" class="form-control daterange-left" value="03/18/2020 - 03/23/2020">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Sign-Off date:</label>
+                                            <div class="col-lg-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                                    <input ng-model="sign_off" type="text" class="form-control pickadate-editable" placeholder="Sign-Off date">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Additional notes:</label>
+                                            <div class="col-lg-9">
+                                                <textarea ng-model="notes" rows="5" cols="5" placeholder="Additional notes..." class="form-control"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+
+                                <div class="text-right">
+                                    <button type="button" ng-click="save()" id="save" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-md-4">
+                    <!-- Dropzone -->
+                    <div class="">
+                        <form action="#" class="dropzone" id="dropzone_multiple"></form>
+                    </div>
+                    <!-- /dropzone -->
+
+                </div>
+
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+
+    </div>
+    <!-- /page container -->
+
+
+    <!-- Footer -->
+    <div ng-include="'./reusable_components/footer.html'"></div>
+    <!-- /footer -->
+    <script>
+
+        // Default initialization
+        $(".styled, .multiselect-container input").uniform({
+            radioClass: 'choice'
+        });
+
+        $('.select').select2();
+
+        // Defaults
+        Dropzone.autoDiscover = false;
+
+        // Multiple files
+        $("#dropzone_multiple").dropzone({
+            paramName: "file", // The name that will be used to transfer the file
+            dictDefaultMessage: 'Drop files to upload <span>or CLICK</span>',
+            autoProcessQueue: false,
+            maxFilesize: 3 // MB
+        });
+
+        // Show calendars on left
+        $('.daterange-left').daterangepicker({
+            opens: 'left',
+            applyClass: 'bg-slate-600',
+            cancelClass: 'btn-default'
+        });
+
+
+        // Editable input
+        var $input_date = $('.pickadate-editable').pickadate({
+            editable: true,
+            format: 'mm-dd-yyyy',
+            onClose: function () {
+                $('.datepicker').focus();
+            }
+        });
+
+
+        var picker_date = $input_date.pickadate('picker');
+        $input_date.on('click', function (event) { // register events (https://github.com/amsul/pickadate.js/issues/542)
+            if (picker_date.get('open')) {
+                picker_date.close();
+            } else {
+                picker_date.open();
+            }
+            event.stopPropagation();
+        });
+
+    </script>
+
+    <script>
+
+        generateObjectId = () => {
+            const timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+            return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
+                return (Math.random() * 16 | 0).toString(16);
+            }).toLowerCase();
+        };
+
+        var defaultProject = firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+
+        var app = angular.module("sampleApp", []);
+        app.controller("SampleCtrl", function ($scope) {
+
+
+            $scope.save = function () {
+
+                let id = generateObjectId();
+
+                let range = $scope.date_range.split(" - ")
+                let start = range[0]
+                let end = range[1]
+                let sign_off = new Date($scope.sign_off).toJSON() || new Date().toJSON()
+                let notes = $scope.notes || ""
+                let agreement = $scope.agreement || ""
+                let amount = $scope.amount || ""
+                let party = $scope.party || ""
+
+                db
+                    .collection("contracts")
+                    .doc(id)
+                    .set({
+                        id: id,
+                        agreement: agreement,
+                        amount: amount,
+                        start: start,
+                        end: end,
+                        sign_off: sign_off,
+                        notes: notes,
+                        party: party
+                    })
+                    .then(function (docRef) {
+                        window.location.href = "contract_general.html?id=" + id;
+                    })
+                    .catch(function (error) {
+                        console.error("Error adding document: ", error);
+                    });
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>

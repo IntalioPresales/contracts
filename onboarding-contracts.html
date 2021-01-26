@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contracts Management System</title>
+    <base href="./">
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> -->
+    <!-- <script src="./node_modules/html2pdf.js/dist/html2pdf.js"></script> -->
+    <!-- <script src="./node_modules/jspdf/dist/jspdf.min.js"></script> -->
+    <script src="./assets/js/html2pdf.js"></script>
+
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- /theme JS files -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAPOe54ZIpN2F4uDklPbehO-sY4Cn2nECs",
+            authDomain: "contracts-3048a.firebaseapp.com",
+            databaseURL: "https://contracts-3048a.firebaseio.com",
+            projectId: "contracts-3048a",
+            storageBucket: "contracts-3048a.appspot.com",
+            messagingSenderId: "178874374202",
+            appId: "1:178874374202:web:b9b301ff1432824f9c7d03",
+            measurementId: "G-PL9G9FTL9M"
+        };
+		 // Initialize Firebase
+		 // firebase.initializeApp(firebaseConfig);
+		 // firebase.analytics();
+    </script>
+
+
+    <style>
+        .timeline.timeline-left {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .modal-body {
+            height: calc(100% - 110px);
+        }
+
+        .modal-content {
+            height: 92vh;
+        }
+
+        .timeline-row {
+            z-index: 2;
+        }
+
+        .timeline-container:after {
+            z-index: 0;
+        }
+
+        .timeline-icon.approved {
+            background: #2196f3;
+            color: #fff;
+        }
+
+        .timeline-icon.pending {
+            background: #999;
+            color: #fff;
+        }
+
+        .timeline-icon i {
+            margin: auto;
+            margin-left: 10px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+        
+
+        .tab_opp {
+            border-top: 3px solid #2196f3!important;
+        }
+
+        .tab_opp .badge {
+            background-color: #6d94e8;
+            margin-right: 5px;
+            border: none;
+        }
+
+        .tab_draft {
+            border-top: 3px solid #966de8;
+        }
+
+        .tab_draft .badge {
+            background-color: #966de8;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .tab_completed {
+            border-top: 3px solid #2cb84f;
+        }
+
+        .tab_completed .badge {
+            background-color: #2cb84f;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .tab_renewal {
+            border-top: 3px solid #e89c6d;
+        }
+
+        .tab_renewal .badge {
+            background-color: #e89c6d;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .tab_canceled {
+            border-top: 3px solid #e87d6d;
+        }
+
+        .tab_canceled .badge {
+            background-color: #e87d6d;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .tab_sign {
+            border-top: 3px solid #29c4b7;
+        }
+
+        .tab_sign .badge {
+            background-color: #29c4b7;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .p-heading {
+            padding: 15px 0;
+            color: #1d9ac3;
+            font-size: 18px;
+            font-weight: 500;
+            border-bottom: 1px solid #1d9ac3;
+            border-top: 1px solid #1d9ac3;
+        }
+
+      
+    </style>
+
+</head>
+
+<body ng-controller="SampleCtrl">
+
+    <!-- Main navbar -->
+    <div ng-include="'./reusable_components/main_navbar.html'"></div>
+    <!-- /Main navbar -->
+
+    <!-- Second navbar -->
+    <div ng-include="'./reusable_components/second_navbar.html'"></div>
+    <!-- / Second navbar -->
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Contracts</span> </h4>
+
+                <ul class="breadcrumb breadcrumb-caret position-right">
+                    <li><a href="#">Contracts</a></li>
+                    <li class="active"> Main</li>
+                </ul>
+            </div>
+
+            <div class="heading-elements">
+                <div class="heading-btn-group">
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+                    <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+
+
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <!-- <li><a href="javascript:void(0)" data-toggle="modal" data-target="#viewer"><i class="icon-repo-forked"></i> Visual Tracking</a></li> -->
+
+                <div class="navbar navbar-default navbar-component navbar-xs no-padding">
+                    <ul class="nav nav-tabs nav-tabs-solid nav-justified no-margin">
+                        <li class="tab_opp active"><a href="#opp-tab" data-toggle="tab">
+                                <span class="badge badge-successt">6</span>
+                                New contracts
+                            </a>
+                        </li>
+                        <li class="tab_draft"><a href="#draft-tab" data-toggle="tab">
+                                <span class="badge badge-success">3</span>
+                                Draft
+                            </a>
+                        </li>
+                        <li class="tab_completed"><a href="#completed-tab" data-toggle="tab">
+                                <span class="badge badge-success">2</span>
+                                Completed
+                            </a>
+                        </li>
+                        <li class="tab_renewal"><a href="#renewal-tab" data-toggle="tab">
+                                <span class="badge badge-success">1</span>
+                                Renewal
+                            </a>
+                        </li>
+                        <li class="tab_canceled"><a href="#canceled-tab" data-toggle="tab">
+                                <span class="badge badge-success">2</span>
+                                Canceled
+                            </a>
+                        </li>
+                        <li class="tab_sign"><a href="#sign-tab" data-toggle="tab">
+                                <span class="badge badge-success">3</span>
+                                E-Signed
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+
+                    <!-- OPP TAB -->
+                    <div class="tab-pane active" id="opp-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Parties</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Effective date</th>
+                                        <th>Expiration date</th>
+                                        <th>Status</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-if="!contracts.length">
+                                        <td colspan="6">No Contracts found.</td>
+                                    </tr>
+
+                                    <tr ng-repeat="contract in contracts">
+                                        <td><a href="contract_general.html?id={{contract.id}}">{{contract.agreement}}</a></td>
+                                        <td> <a href="party-details.html">{{contract.party}}</a></td>
+                                        <td>{{ contract.start  | date:'mediumDate' }}</td>
+                                        <td>{{ contract.end  | date:'mediumDate' }} </td>
+                                        <td>New</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="javascript:void(0)" data-toggle="modal" data-target="#timeline_modal"><i class="icon-repo-forked"></i> Visual Tracking</a></li>
+                                                        <li><a href="javascript:void(0)" ng-click="deleteContract(contract.id)"><i class="icon-trash"></i> Reject Contract</a></li>
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / OPP TAB -->
+
+                    <!-- DRAFT TAB -->
+                    <div class="tab-pane" id="draft-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Draft</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Effective date</th>
+                                        <th>Expiration date</th>
+                                        <th>Completion</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="contract_general.html">CTS Solution</a></td>
+                                        <td> <a href="party-details.html">Microsoft</a></td>
+                                        <td>03/08/2020</td>
+                                        <td>02/09/2020 </td>
+                                        <td>50%</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">Meeting Solution</a></td>
+                                        <td> <a href="party-details.html">Samsung</a></td>
+                                        <td>03/08/2020</td>
+                                        <td>02/09/2020 </td>
+                                        <td>30%</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">Data Processing</a></td>
+                                        <td> <a href="party-details.html">AT&T</a></td>
+                                        <td>03/08/2020</td>
+                                        <td>02/09/2020 </td>
+                                        <td>40%</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / DRAFT TAB -->
+
+                    <!-- COMPLETED TAB -->
+                    <div class="tab-pane" id="completed-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Completed</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Effective date</th>
+                                        <th>Expiration date</th>
+                                        <th>Stage</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="contract_general.html">E-Sign Solution</a></td>
+                                        <td> <a href="party-details.html">Mersaco</a></td>
+                                        <td>03/01/2020</td>
+                                        <td>02/03/2020 </td>
+                                        <td>Completed</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">AI Web Services</a></td>
+                                        <td> <a href="party-details.html">Microsoft</a></td>
+                                        <td>03/04/2020</td>
+                                        <td>02/05/2020 </td>
+                                        <td>Completed</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / COMPLETED TAB -->
+
+                    <!-- RENEWAL TAB -->
+                    <div class="tab-pane" id="renewal-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Renewal</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Effective date</th>
+                                        <th>Stage</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="contract_general.html">Document Management System</a></td>
+                                        <td> <a href="party-details.html">Apple</a></td>
+                                        <td>02/01/2020</td>
+                                        <td>07/03/2020 </td>
+                                        <td>Renewal</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / RENEWAL TAB -->
+
+                    <!-- CANCELED TAB -->
+                    <div class="tab-pane" id="canceled-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Canceled</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Date</th>
+                                        <th>Reason</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="contract_general.html">Contact Management System</a></td>
+                                        <td> <a href="party-details.html">DHL</a></td>
+                                        <td>07/03/2020 </td>
+                                        <td>Do not fit the requirements.</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">Security Web Services</a></td>
+                                        <td> <a href="party-details.html">Facebook</a></td>
+                                        <td>02/04/2020 </td>
+                                        <td>Out of date</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / CANCELED TAB -->
+
+                    <!-- SIGN TAB -->
+                    <div class="tab-pane" id="sign-tab">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">E-Signed</h5>
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                        <li><a data-action="close"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-hover datatable-highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Agreement</th>
+                                        <th>CounterParty</th>
+                                        <th>Effective date</th>
+                                        <th>Expiration date</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="contract_general.html">Project Management System</a></td>
+                                        <td> <a href="party-details.html">Jeff Cunstructions</a></td>
+                                        <td>03/10/2020</td>
+                                        <td>02/11/2020 </td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">KMS Solution</a></td>
+                                        <td> <a href="party-details.html">South Cunstructions</a></td>
+                                        <td>01/08/2020</td>
+                                        <td>02/11/2023 </td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="contract_general.html">Pharmacy System</a></td>
+                                        <td> <a href="party-details.html">AUB Pharmacy</a></td>
+                                        <td>01/08/2020</td>
+                                        <td>02/11/2023 </td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                                        <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                                        <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- / SIGN TAB -->
+
+                </div>
+
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+
+    </div>
+    <!-- /page container -->
+
+
+    <!-- Footer -->
+    <div ng-include="'./reusable_components/footer.html'"></div>
+    <!-- /footer -->
+
+    <!-- Primary modal -->
+    <div id="timeline_modal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h6 class="modal-title">Visual Tracking</h6>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Timeline -->
+                    <div class="timeline timeline-left">
+                        <div class="timeline-container">
+
+                            <!-- Tasks -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon approved">
+                                    <i class="icon-check"></i>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="panel border-left-lg border-left-primary timeline-content">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h6 class="no-margin-top"><a href="javascipt:void(0)">#1. Procurement Department</a></h6>
+                                                        <p class="mb-15">Excessive rules, procedures, and regulations..</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <ul class="list task-details">
+                                                            <li>15 January, 2019</li>
+                                                            <li class="dropdown">
+                                                                Status: &nbsp;
+                                                                <a href="#" class="label label-primary dropdown-toggle">Approved <span class="caret"></span></a>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="#"><span class="status-mark position-left bg-danger"></span> Highest priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-info"></span> High priority</a></li>
+                                                                    <li class="active"><a href="#"><span class="status-mark position-left bg-primary"></span> Normal priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-success"></span> Low priority</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="javascript:void(0)">Digital Mailroom</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer panel-footer-condensed">
+                                                <div class="heading-elements">
+                                                    <span class="heading-text">Due: <span class="text-semibold">23 hours</span></span>
+
+                                                    <ul class="list-inline list-inline-condensed heading-text pull-right">
+                                                        <li class="dropdown">
+                                                            <a href="#" class="text-default dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i> <span class="caret"></span></a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a href="#"><i class="icon-alarm-add"></i> Check in</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="#"><i class="icon-bell3"></i> Manage Notifications</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tasks -->
+
+                            <!-- Tasks -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon approved">
+                                    <i class="icon-check"></i>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="panel border-left-lg border-left-primary timeline-content">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h6 class="no-margin-top"><a href="javascipt:void(0)">#2. Legal Department</a></h6>
+                                                        <p class="mb-15">A written or printed statement made under oath.</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <ul class="list task-details">
+                                                            <li>15 January, 2019</li>
+                                                            <li class="dropdown">
+                                                                Status: &nbsp;
+                                                                <a href="#" class="label label-primary dropdown-toggle">Approved <span class="caret"></span></a>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="#"><span class="status-mark position-left bg-danger"></span> Highest priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-info"></span> High priority</a></li>
+                                                                    <li class="active"><a href="#"><span class="status-mark position-left bg-primary"></span> Normal priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-success"></span> Low priority</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="javascript:void(0)">Digital Mailroom</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer panel-footer-condensed">
+                                                <div class="heading-elements">
+                                                    <span class="heading-text">Due: <span class="text-semibold">23 hours</span></span>
+
+                                                    <ul class="list-inline list-inline-condensed heading-text pull-right">
+                                                        <li class="dropdown">
+                                                            <a href="#" class="text-default dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i> <span class="caret"></span></a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a href="#"><i class="icon-alarm-add"></i> Check in</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="#"><i class="icon-bell3"></i> Manage Notifications</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tasks -->
+
+                            <!-- Tasks -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon approved">
+                                    <i class="icon-check"></i>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="panel border-left-lg border-left-primary timeline-content">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h6 class="no-margin-top"><a href="javascipt:void(0)">#3. Financial Department </a></h6>
+                                                        <p class="mb-15">The record of an organisation's income and financial situation.</p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <ul class="list task-details">
+                                                            <li>16 January, 2019</li>
+                                                            <li class="dropdown">
+                                                                Status: &nbsp;
+                                                                <a href="#" class="label label-primary dropdown-toggle">Approved <span class="caret"></span></a>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="#"><span class="status-mark position-left bg-danger"></span> Highest priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-info"></span> High priority</a></li>
+                                                                    <li class="active"><a href="#"><span class="status-mark position-left bg-primary"></span> Normal priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-success"></span> Low priority</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="javascript:void(0)">Digital Mailroom</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer panel-footer-condensed">
+                                                <div class="heading-elements">
+                                                    <span class="heading-text">Due: <span class="text-semibold">10 hours</span></span>
+
+                                                    <ul class="list-inline list-inline-condensed heading-text pull-right">
+                                                        <li class="dropdown">
+                                                            <a href="#" class="text-default dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i> <span class="caret"></span></a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a href="#"><i class="icon-alarm-add"></i> Check in</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="#"><i class="icon-bell3"></i> Manage Notifications</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tasks -->
+
+
+                            <!-- PENDING -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon pending">
+                                    <i class="icon-alarm-add"></i>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="panel border-left-lg border-left-grey-300 timeline-content">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h6 class="no-margin-top"><a href="javascipt:void(0)" class="text-muted">#4. Management </a></h6>
+                                                        <p class="mb-15"></p>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <ul class="list task-details">
+                                                            <li>In-process</li>
+                                                            <li class="dropdown">
+                                                                Status: &nbsp;
+                                                                <a href="#" class="label label-default dropdown-toggle">Pending <span class="caret"></span></a>
+                                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                    <li><a href="#"><span class="status-mark position-left bg-danger"></span> Highest priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-info"></span> High priority</a></li>
+                                                                    <li class="active"><a href="#"><span class="status-mark position-left bg-primary"></span> Normal priority</a></li>
+                                                                    <li><a href="#"><span class="status-mark position-left bg-success"></span> Low priority</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="javascript:void(0)">Digital Mailroom</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer panel-footer-condensed">
+                                                <div class="heading-elements">
+                                                    <span class="heading-text"> <span class="text-semibold"></span></span>
+
+                                                    <ul class="list-inline list-inline-condensed heading-text pull-right">
+                                                        <li class="dropdown">
+                                                            <a href="#" class="text-default dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i> <span class="caret"></span></a>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a href="#"><i class="icon-alarm-add"></i> Check in</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="#"><i class="icon-bell3"></i> Manage Notifications</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ PENDING -->
+
+
+                        </div>
+                    </div>
+                    <!-- /timeline -->
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /primary modal -->
+
+
+    <!-- Primary modal -->
+    <div id="viewer" class="modal fade">
+        <div class="modal-dialog modal-full">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h6 class="modal-title">Visual Tracking</h6>
+                </div>
+
+                <div class="modal-body">
+
+                    <iframe
+                        src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&scrollbar=0"
+                        frameBorder="0"
+                        scrolling="auto"
+                        height="100%"
+                        width="100%"></iframe>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /primary modal -->
+
+
+
+    <script>
+
+        var defaultProject = firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        var app = angular.module("sampleApp", []);
+        app.controller("SampleCtrl", function ($scope) {
+
+            $scope.loadContracts = function () {
+
+                var contractsRef = db.collection("contracts").get();
+                $scope.contracts = []
+
+                contractsRef.then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        $scope.contracts.push(doc.data())
+                        // doc.data() is never undefined for query doc snapshots
+                        console.log(doc.id, " => ", doc.data());
+                    });
+                    $scope.$digest();
+                })
+                    .catch(function (error) {
+                        console.log("Error getting document:", error);
+                    });
+
+            }
+
+            $scope.loadContracts()
+
+
+            $scope.deleteContract = function (id) {
+                if (!id) return;
+
+                db.collection("contracts")
+                    .doc(id)
+                    .delete().then(function () {
+                        swal({
+                            title: "Contract rejected.",
+                            text: "Press ok to exit",
+                            confirmButtonColor: "#66BB6A",
+                            type: "success"
+                        });
+                        $scope.loadContracts()
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+            }
+        });
+
+
+    </script>
+
+    <script>
+        // var element = document.getElementById('print');
+        // var worker = html2pdf().from(element).save();
+    // var worker = html2pdf().from(element).toPdf()
+
+    </script>
+
+</body>
+
+</html>

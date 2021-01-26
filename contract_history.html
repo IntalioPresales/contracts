@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Contracts Management System</title>
+<base href="./">
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery_ui/touch.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/uploaders/dropzone.min.js"></script>
+	<script type="text/javascript" src="assets/js/charts/appex/appex.js"></script>
+
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/pages/datatables_advanced.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<!-- /theme JS files -->
+
+	<style>
+		.label {
+			margin-bottom: 2px;
+		}
+
+		.fa-bank {
+			font-size: 7em;
+			color: #54647e;
+		}
+
+		.handshake {
+			height: 70px;
+			margin: 0 115px;
+		}
+
+		.party_name {
+			padding-top: 10px;
+			text-align: center;
+			font-size: 18px;
+			font-weight: 500;
+			color: #514949;
+		}
+
+		.party_type {
+			text-align: center;
+			color: #7e7979;
+			font-size: 16px;
+		}
+
+		.contract_info_label {
+			display: inline-block;
+			width: 160px;
+			font-weight: 500;
+		}
+
+		.contract_info_box>div {
+			margin-bottom: 3px;
+		}
+
+		.e-file-preview {
+			min-width: 200px;
+			background: #f2f3f4;
+			border: 1px solid #ccc;
+			padding: 7px 10px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin: 5px;
+		}
+
+		.term-entities>div {
+			padding: 4px 0px;
+			margin: 3px 0;
+			display: flex;
+			align-items: center;
+		}
+
+		.term-text {
+			padding: 9px 14px 9px 8px;
+			background: #f4f4f4;
+			border-radius: 3px;
+			border-bottom: 1px solid #ddd;
+			width: 100%;
+		}
+
+		.contract_version_range {
+			color: #657fb3;
+			font-size: 14px;
+			font-weight: 600;
+		}
+	</style>
+</head>
+
+<body ng-app="">
+
+	<!-- Main navbar -->
+	<div ng-include="'./reusable_components/main_navbar.html'"></div>
+	<!-- /Main navbar -->
+
+	<!-- Second navbar -->
+	<div ng-include="'./reusable_components/second_navbar.html'"></div>
+	<!-- / Second navbar -->
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Contract</span> - Digital Mailroom </h4>
+
+				<ul class="breadcrumb breadcrumb-caret position-right">
+					<li><a href="#">Contract</a></li>
+					<li class="active">Contract details</li>
+				</ul>
+			</div>
+
+			<div class="heading-elements">
+				<div class="heading-btn-group">
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main sidebar -->
+			<div class="sidebar sidebar-main sidebar-default sidebar-separate">
+				<div class="sidebar-content">
+
+					<!-- QUICK DETAILS -->
+					<div class="sidebar-category">
+						<div class="category-title">
+							<span>Agreement</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+						<div class="category-content">
+							<div class="e-label"><strong>ID:</strong> <span class="pull-right">OP001</span></div>
+							<div class="e-label"><strong>Counterparty:</strong> <span class="pull-right">Microsoft</span></div>
+							<div class="e-label"><strong>Agreement:</strong> <span class="pull-right">Digital Mailroom</span></div>
+							<div class="e-label"><strong>Status:</strong> <span class="pull-right">Pending approval</span></div>
+							<div class="e-label"><strong>Due date:</strong> <span class="pull-right">5 days</span></div>
+						</div>
+					</div>
+					<!-- / QUICK DETAILS -->
+
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-title">
+							<span>Main navigation</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<li class=""><a href="contract_general.html"><i class="icon-paperplane"></i> <span>Contract details</span></a></li>
+								<li class=""><a href="contract_approval.html"><i class="icon-checkmark"></i> <span>Approval</span></a></li>
+								<li class=""><a href="contract_clarifications.html"><i class="icon-question3"></i> <span>Clarifications</span></a></li>
+								<li class="active"><a href="contract_history.html"><i class="icon-database4"></i> <span>History</span></a></li>
+
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Highlighting rows and columns -->
+				<div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title">History</h5>
+						<div class="heading-elements">
+							<ul class="icons-list">
+								<li><a data-action="collapse"></a></li>
+								<li><a data-action="reload"></a></li>
+								<li><a data-action="close"></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<table class="table table-bordered table-hover datatable-highlight">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Date</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="active border-double">
+								<td colspan="3" class="text-semibold contract_version_range">11/11/2018 <i class="icon-arrow-right16 mr-5 ml-5"></i> 11/11/2019</td>
+							</tr>
+
+							<tr>
+								<td>Created</td>
+								<td>02/11/2018 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Presales department Approval</td>
+								<td>03/11/2018 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>CEO Approval</td>
+								<td>05/11/2018 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Signed</td>
+								<td>07/11/2018 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr class="active border-double">
+								<td colspan="3" class="text-semibold contract_version_range">11/11/2019 <i class="icon-arrow-right16 mr-5 ml-5"></i> 11/11/2020</td>
+							</tr>
+
+							<tr>
+								<td>Renewal</td>
+								<td>05/11/2020 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>CEO Approval</td>
+								<td>05/11/2019 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Signed</td>
+								<td>08/11/2019 </td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<!-- /highlighting rows and columns -->
+
+			</div>
+			<!-- /page content -->
+
+		</div>
+		<!-- /page container -->
+
+
+		<!-- Footer -->
+		<div ng-include="'./reusable_components/footer.html'"></div>
+		<!-- /footer -->
+
+
+		<script>
+
+
+
+		</script>
+
+</body>
+
+</html>

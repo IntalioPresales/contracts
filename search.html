@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Contracts Management System</title>
+<base href="./">
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/datatables_advanced.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!-- /theme JS files -->
+
+</head>
+
+<body ng-app="">
+
+	<!-- Main navbar -->
+	<div ng-include="'./reusable_components/main_navbar.html'"></div>
+	<!-- /Main navbar -->
+
+	<!-- Second navbar -->
+	<div ng-include="'./reusable_components/second_navbar.html'"></div>
+	<!-- / Second navbar -->
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Search</span> </h4>
+
+				<ul class="breadcrumb breadcrumb-caret position-right">
+					<li><a href="#">Search</a></li>
+				</ul>
+			</div>
+
+			<div class="heading-elements">
+				<div class="heading-btn-group">
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Highlighting rows and columns -->
+				<div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title">Filter</h5>
+						<div class="heading-elements">
+							<ul class="icons-list">
+								<li><a data-action="collapse"></a></li>
+								<li><a data-action="reload"></a></li>
+								<li><a data-action="close"></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="panel-body">
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="text" placeholder="Search" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<a href="#" class="btn btn-link btn-float has-text border-blue-300">
+										<i class="icon-printer2 text-primary"></i>
+									</a>
+									<a href="#" class="btn btn-link btn-float has-text border-blue-300" ng-click="filter = !filter">
+										<i class="icon-filter3 text-primary"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" ng-hide="!filter">
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<select data-placeholder="Counterparty" class="select">
+										<option></option>
+										<optgroup label="Government">
+											<option value="AK">MOFA</option>
+										</optgroup>
+										<optgroup label="Enteprice">
+											<option value="CA">Apple</option>
+											<option value="OR">Microsoft</option>
+											<option value="WA">OneSoft</option>
+										</optgroup>
+									</select>
+									<div class="form-control-feedback">
+										<i class="icon-office"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="text" placeholder="Contract title" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<select placeholder="Status" data-placeholder="Status" class="select">
+										<option>-- SELECT STATUS --</option>
+										<option>New Opportinity</option>
+										<option>Draft</option>
+										<option>Pending Approval</option>
+										<option>Rejected</option>
+										<option>Completed</option>
+										<option>Signed</option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row" ng-hide="!filter">
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="text" placeholder="Effective date" class="form-control">
+									<div class="form-control-feedback">
+										<i class="icon-calendar3"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="text" placeholder="Expiration date" class="form-control">
+									<div class="form-control-feedback">
+										<i class="icon-calendar3"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+								<div class="form-group">
+									<input type="text" placeholder="Attachment" class="form-control">
+									<div class="form-control-feedback">
+										<i class="icon-attachment"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 ">
+								<button type="submit" class="btn btn-primary">Search <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+
+						</div>
+
+					</div>
+
+
+				</div>
+				<!-- /highlighting rows and columns -->
+
+				<!-- Highlighting rows and columns -->
+				<div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title">Results</h5>
+						<div class="heading-elements">
+							<ul class="icons-list">
+								<li><a data-action="collapse"></a></li>
+								<li><a data-action="reload"></a></li>
+								<li><a data-action="close"></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<table class="table table-bordered table-hover datatable-highlight">
+						<thead>
+							<tr>
+								<th>Agreement</th>
+								<th>Counterparty </th>
+								<th>Effective date</th>
+								<th>Expiration date</th>
+								<th>Status</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Project Management System</td>
+								<td> <a href="party-details.html">Jeff Cunstructions</a></td>
+								<td>03/10/2020</td>
+								<td>02/11/2020 </td>
+								<td>Completed</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>KMS Solution</td>
+								<td> <a href="party-details.html">South Cunstructions</a></td>
+								<td>03/04/2020</td>
+								<td>02/05/2020 </td>
+								<td>Completed</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Pharmacy System</td>
+								<td> <a href="party-details.html">AUB Pharmacy</a></td>
+								<td>03/04/2020</td>
+								<td>02/05/2020 </td>
+								<td>E-Signed</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Document Management System</td>
+								<td> <a href="party-details.html">Apple</a></td>
+								<td>02/01/2020</td>
+								<td>07/03/2020 </td>
+								<td>Waiting Approval</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>Oracle Consulting</td>
+								<td> <a href="party-details.html">MOFA</a></td>
+								<td>02/06/2020</td>
+								<td>02/07/2020 </td>
+								<td>New</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<td>DMS Software</td>
+								<td> <a href="party-details.html">OneSoft</a></td>
+								<td>02/06/2020</td>
+								<td>02/07/2020 </td>
+								<td>New</td>
+								<td class="text-center">
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#">Create draft</a></li>
+												<li><a href="#">View</a></li>
+												<li><a href="#">Notifications</a></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+				<!-- /highlighting rows and columns -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+
+	<!-- Footer -->
+	<div ng-include="'./reusable_components/footer.html'"></div>
+	<!-- /footer -->
+
+	<script>
+		$('.select').select2();
+	</script>
+</body>
+
+</html>

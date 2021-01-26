@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleApp">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Contracts Management System</title>
+	<base href="./">
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery_ui/touch.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/uploaders/dropzone.min.js"></script>
+	<script type="text/javascript" src="assets/js/charts/appex/appex.js"></script>
+
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/pages/datatables_advanced.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-firestore.js"></script>
+
+	<script src="./assets/js/html2pdf.js"></script>
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyAPOe54ZIpN2F4uDklPbehO-sY4Cn2nECs",
+			authDomain: "contracts-3048a.firebaseapp.com",
+			databaseURL: "https://contracts-3048a.firebaseio.com",
+			projectId: "contracts-3048a",
+			storageBucket: "contracts-3048a.appspot.com",
+			messagingSenderId: "178874374202",
+			appId: "1:178874374202:web:b9b301ff1432824f9c7d03",
+			measurementId: "G-PL9G9FTL9M"
+		};
+		 // Initialize Firebase
+		 // firebase.initializeApp(firebaseConfig);
+		 // firebase.analytics();
+	</script>
+
+	<!-- /theme JS files -->
+
+	<style>
+		.label {
+			margin-bottom: 2px;
+		}
+
+		.fa-bank {
+			font-size: 7em;
+			color: #54647e;
+		}
+
+		.handshake {
+			height: 70px;
+			margin: 0 115px;
+		}
+
+		.party_name {
+			padding-top: 10px;
+			text-align: center;
+			font-size: 18px;
+			font-weight: 500;
+			color: #514949;
+		}
+
+		.party_type {
+			text-align: center;
+			color: #7e7979;
+			font-size: 16px;
+		}
+
+		.contract_info_label {
+			display: inline-block;
+			width: 160px;
+			font-weight: 500;
+		}
+
+		.contract_info_box>div {
+			margin-bottom: 3px;
+		}
+
+		.e-file-preview {
+			min-width: 200px;
+			background: #f2f3f4;
+			border: 1px solid #ccc;
+			padding: 7px 10px;
+			border-radius: 4px;
+			cursor: pointer;
+			margin: 5px;
+		}
+
+		.term-entities>div {
+			padding: 4px 0px;
+			margin: 3px 0;
+			display: flex;
+			align-items: center;
+		}
+
+		.term-text {
+			padding: 9px 14px 9px 8px;
+			background: #f4f4f4;
+			border-radius: 3px;
+			border-bottom: 1px solid #ddd;
+			width: 100%;
+		}
+
+		.p-container {
+			/* height: 29.7cm; */
+		}
+
+		.p-sub-heading {
+			font-size: 16px;
+			background-color: #ddd;
+			margin-bottom: 15px;
+			margin-top: 15px;
+			padding-left: 10px;
+		}
+
+		.p-section {
+			margin-bottom: 30px;
+		}
+
+
+		.p-section li {
+			margin-bottom: 10px;
+			font-size: 14px;
+			list-style: none;
+			display: flex;
+		}
+
+		.p-container {
+			padding: 20px;
+		}
+
+		.p-heading {
+			padding: 15px 0;
+			color: #1d9ac3;
+			font-size: 20px;
+			font-weight: 500;
+			border-bottom: 1px solid #1d9ac3;
+			border-top: 1px solid #1d9ac3;
+		}
+
+		.p-body {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+
+		#viewer .modal-content {
+			height: 92vh;
+		}
+
+		#viewer .modal-body {
+			height: calc(100% - 110px);
+		}
+	</style>
+
+</head>
+
+<body ng-controller="SampleCtrl">
+
+	<!-- Main navbar -->
+	<div ng-include="'./reusable_components/main_navbar.html'"></div>
+	<!-- /Main navbar -->
+
+	<!-- Second navbar -->
+	<div ng-include="'./reusable_components/second_navbar.html'"></div>
+	<!-- / Second navbar -->
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4 class="text-capitalize"><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Contract</span> - {{ contract.agreement}} </h4>
+
+				<ul class="breadcrumb breadcrumb-caret position-right">
+					<li><a href="#">Contract</a></li>
+					<li class="active">Contract details</li>
+				</ul>
+			</div>
+
+			<div class="heading-elements">
+				<div class="heading-btn-group">
+					<div id="download_pdf" class="btn btn-link btn-float has-text"><i class="icon-download7 text-primary"></i> <span>Download</span></div>
+					<a href="javacript:void()" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+					<a href="javacript:void()" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main sidebar -->
+			<div class="sidebar sidebar-main sidebar-default sidebar-separate">
+				<div class="sidebar-content">
+
+					<!-- QUICK DETAILS -->
+					<div class="sidebar-category">
+						<div class="category-title">
+							<span>Agreement</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+						<div class="category-content">
+							<div class="e-label"><strong>ID: </strong> <span class="pull-right">{{displayId(contract.id)}}</span></div>
+							<div class="e-label"><strong>Second party:</strong> <span class="pull-right">{{ contract.party }}</span></div>
+							<div class="e-label"><strong>Contract Title:</strong> <span class="pull-right text-capitalize">{{ contract.agreement }}</span></div>
+							<div class="e-label"><strong>Status:</strong> <span class="pull-right">Pending approval</span></div>
+							<!-- <div class="e-label"><strong>Due date:</strong> <span class="pull-right">5 days</span></div> -->
+						</div>
+					</div>
+					<!-- / QUICK DETAILS -->
+
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-title">
+							<span>Main navigation</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<li class="active"><a href="contract_general.html"><i class="icon-paperplane"></i> <span>Contract details</span></a></li>
+								<li class=""><a href="contract_approval.html"><i class="icon-checkmark"></i> <span>Approval</span></a></li>
+								<li class=""><a href="contract_clarifications.html"><i class="icon-question3"></i> <span>Clarifications</span></a></li>
+								<li class=""><a href="contract_history.html"><i class="icon-database4"></i> <span>History</span></a></li>
+
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- TABS -->
+				<div class="navbar navbar-default navbar-component navbar-xs no-padding">
+					<ul class="nav nav-tabs nav-tabs-solid nav-justified no-margin">
+						<li class="active"><a href="#general-tab" data-toggle="tab"> General Info </a> </li>
+						<li class=""><a href="#terms-tab" data-toggle="tab"> Terms & Conditions </a> </li>
+						<li class=""><a href="#scope-tab" data-toggle="tab"> Scope of work</a> </li>
+						<li class=""><a href="#payment-tab" data-toggle="tab"> Payments</a> </li>
+						<li class=""><a href="#milestone-tab" data-toggle="tab"> Milestone</a> </li>
+						<li class=""><a href="#penalties-tab" data-toggle="tab"> Penalties </a> </li>
+						<li class=""><a href="#other-tab" data-toggle="tab"> Other </a> </li>
+					</ul>
+				</div>
+				<!-- TABS -->
+
+				<!-- TABS CONTENT -->
+				<div class="tab-content">
+
+					<!-- OPP TAB -->
+					<div class="tab-pane active" id="general-tab">
+
+						<div class="panel panel-flat border-top-xlg border-top-blue">
+							<div class="panel-heading">
+								<h6 class="panel-title"><span class="text-semibold"><i class="icon-collaboration mr-10"></i>Parties</span></h6>
+							</div>
+
+							<div class="panel-body">
+								<div class="flex-row justify-center">
+									<div class="flex-column justify-center">
+										<i class="fa fa-bank"></i>
+										<div class="party_name">Everteam</div>
+										<div class="party_type">Enterprise Comp</div>
+									</div>
+									<div class="">
+										<img class="handshake" src="assets/images/icons8-handshake-100.png">
+									</div>
+									<div class="flex-column justify-center">
+										<i class="fa fa-bank"></i>
+										<div class="party_name">{{ contract.party }}</div>
+										<di class="party_type">Enterprise Comp</di>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row flex">
+
+							<div class="col-md-6 col-lg-6">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold"><i class="icon-stack3 mr-10"></i> Contract Information</span> </h6>
+									</div>
+									<div class="panel-body contract_info_box">
+										<div>
+											<div class="contract_info_label">
+												Agreement
+											</div>
+											<span class="text-capitalize">{{ contract.agreement }}</span>
+										</div>
+										<div>
+											<div class="contract_info_label">Amount</div>
+											<span>&dollar; {{ contract.amount | number}}</span>
+										</div>
+										<div>
+											<div class="contract_info_label">
+												Effective Date
+											</div>
+											<span>{{ contract.start  | date:'mediumDate' }}</span>
+										</div>
+										<div>
+											<div class="contract_info_label">
+												Expiration Date
+											</div>
+											<span>{{ contract.end  | date:'mediumDate' }}</span>
+										</div>
+
+										<div>
+											<div class="contract_info_label">
+												Sign-Off date
+											</div>
+											<span>{{ contract.sign_off  | date:'mediumDate' }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-6 col-lg-6">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold"><i class="icon-attachment mr-10"></i>Attachment</span> </h6>
+									</div>
+									<div class="panel-body">
+										<div class="flex-row flex-wrap">
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-word mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://file-examples.com/wp-content/uploads/2017/02/file-sample_100kB.docx&embedded=true&hl=Nl')">Overview.docx</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-openoffice mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://angular-doc-viewer.firebaseapp.com/assets/file_example_PPT_250kB.ppt&embedded=true&hl=Nl')">Demo.ppt</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-excel mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://file-examples.com/wp-content/uploads/2017/02/file_example_XLSX_10.xlsx&embedded=true&hl=Nl')">Stripe Fees.xlx</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-pdf mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://unaids.org/sites/default/files/RFP-2015-01_Request_for_Proposal_IT-LTA.pdf&embedded=true&hl=Nl')">Income Charts.pdf</a>
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- / TERMS TAB -->
+					<div class="tab-pane" id="terms-tab">
+
+						<div class="mb-10 text-right">
+							<a href="#" class="btn bg-blue btn-labeled heading-btn" data-toggle="modal" data-target="#addTermGroup"><b><i class="icon-task"></i></b>Add Terms Group</a>
+							<a href="#" class="btn btn-success btn-labeled heading-btn" data-toggle="modal" data-target="#templatesList"><b><i class="icon-task"></i></b>Add Template</a>
+						</div>
+
+						<div class="panel-group accordion-sortable content-group-lg" id="accordion-controls">
+
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h6 class="panel-title">
+										<a class="text-semibold" data-toggle="collapse" data-parent="#accordion-controls" href="#accordion-controls-group1">Tax</a>
+									</h6>
+
+									<div class="heading-elements">
+										<ul class="icons-list">
+											<li><a data-action="close"></a></li>
+											<li><a data-action="move"></a></li>
+											<li><i data-toggle="modal" data-target="#addTerm" class="icon-plus2 cursor-pointer"></i></li>
+										</ul>
+									</div>
+								</div>
+								<div id="accordion-controls-group1" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="term-entities">
+											<div>
+												<i class="icon-arrow-right15 mr-5"></i>
+												<div class="term-text">The Commonwealth is exempt from all excise taxes imposed by the Internal Revenue Service and has accordingly registered with the Internal Revenue Service to make tax free purchases under Registration No. 23740001-K.</div>
+											</div>
+											<div>
+												<i class="icon-arrow-right15 mr-5"></i>
+												<div class="term-text">The Commonwealth is also exempt from Pennsylvania state sales tax, local sales tax, public transportation assistance taxes and fees and vehicle rental tax. The Department of Revenue regulations provide that exemption certificates
+													are not required for sales made to governmental entities and none will be issued. Nothing in this paragraph is meant to exempt a construction contractor from the payment of any of these taxes or fees</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h6 class="panel-title">
+										<a class="text-semibold" data-toggle="collapse" data-parent="#accordion-controls" href="#accordion-controls-group1">Compliance with law </a>
+									</h6>
+
+									<div class="heading-elements">
+										<ul class="icons-list">
+											<li><a data-action="close"></a></li>
+											<li><a data-action="move"></a></li>
+											<li><i data-toggle="modal" data-target="#addTerm" class="icon-plus2 cursor-pointer"></i></li>
+										</ul>
+									</div>
+								</div>
+								<div id="accordion-controls-group1" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="term-entities">
+											<div>
+												<i class="icon-arrow-right15 mr-5"></i>
+												<div class="term-text">The Contractor shall comply with all applicable federal and state laws and regulations and local ordinances in the performance of the Contract. </div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<!-- TERMS TAB -->
+
+					<!-- / SCOPE TAB -->
+					<div class="tab-pane" id="scope-tab">
+
+						<div class="flex">
+
+							<div class="col-md-8 col-lg-8">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold"><i class="icon-attachment mr-10"></i>Attachment</span> </h6>
+									</div>
+									<div class="panel-body">
+										<div class="flex-row flex-wrap">
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-word mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://file-examples.com/wp-content/uploads/2017/02/file-sample_100kB.docx&embedded=true&hl=Nl')">Overview.docx</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-openoffice mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://angular-doc-viewer.firebaseapp.com/assets/file_example_PPT_250kB.ppt&embedded=true&hl=Nl')">Demo.ppt</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-excel mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://file-examples.com/wp-content/uploads/2017/02/file_example_XLSX_10.xlsx&embedded=true&hl=Nl')">Stripe Fees.xlx</a>
+												</span>
+											</div>
+											<div class="e-file-preview">
+												<span class=""><i class="icon-file-pdf mr-5"></i>
+													<a href="javascript:void(0)" ng-click="openViewer('https://docs.google.com/gview?url=https://unaids.org/sites/default/files/RFP-2015-01_Request_for_Proposal_IT-LTA.pdf&embedded=true&hl=Nl')">Income Charts.pdf</a>
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4 col-lg-4">
+								<!-- Dropzone -->
+								<div class="">
+									<form action="#" class="dropzone" id="dropzone_multiple"></form>
+								</div>
+								<!-- /dropzone -->
+							</div>
+						</div>
+
+					</div>
+					<!-- SCOPE TAB -->
+
+					<!--  PAYMENT TAB -->
+					<div class="tab-pane" id="payment-tab">
+
+						<div class="mb-10">
+							<a href="#" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-task"></i></b>Add Payment</a>
+						</div>
+
+						<div class="row col-md-6 col-lg-6">
+							<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+								<div class="panel-heading">
+									<h6 class="panel-title"><span class="text-semibold">
+											<i class="icon-cash3 mr-10"></i>Payments</span>
+									</h6>
+								</div>
+								<div class="panel-body">
+									<table class="table table-bordered table-hover datatable-highlight">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Type</th>
+												<th>Amount</th>
+												<th class="text-center"></th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr>
+												<td>01/02/2019</td>
+												<td>Cash</td>
+												<td>&dollar; 30,000</td>
+												<td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																<i class="icon-menu9"></i>
+															</a>
+
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+											<tr>
+												<td>02/04/2019</td>
+												<td>Bank transfer</td>
+												<td>&dollar; 90,000</td>
+												<td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																<i class="icon-menu9"></i>
+															</a>
+
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+											<tr>
+												<td>02/06/2019</td>
+												<td>Bank transfer</td>
+												<td>&dollar; 120,000</td>
+												<td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																<i class="icon-menu9"></i>
+															</a>
+
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+											<tr>
+												<td>02/10/2019</td>
+												<td>Bank transfer</td>
+												<td>&dollar; 60,000</td>
+												<td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																<i class="icon-menu9"></i>
+															</a>
+
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- / PAYMENT TAB -->
+
+					<!--  Milestone TAB -->
+					<div class="tab-pane" id="milestone-tab">
+
+						<div class="mb-10">
+							<a href="#" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-task"></i></b>Add Milestone</a>
+						</div>
+
+						<div class="row">
+
+							<!-- miletonse table -->
+							<div class="col-md-12 col-lg-12">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold">
+												<i class="icon-git-branch mr-10"></i>Detailed Milestone</span>
+										</h6>
+									</div>
+									<div class="panel-body">
+										<table class="table table-bordered table-hover datatable-highlight">
+											<thead>
+												<tr>
+													<th>Sequence</th>
+													<th>Milestone</th>
+													<th>Deliverable</th>
+													<th>Delivery date</th>
+													<th>Acceptnace criteria</th>
+													<th>Payment</th>
+													<th class="text-center"></th>
+												</tr>
+											</thead>
+											<tbody>
+
+												<tr>
+													<td>M1</td>
+													<td>SOW Complete</td>
+													<td>Excuted SOW</td>
+													<td>02/03/2019</td>
+													<td>Fully executed SOW</td>
+													<td>50% of fee</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>M2</td>
+													<td>User stories</td>
+													<td>Wireframes and none functional requirements.</td>
+													<td>02/06/2019</td>
+													<td>Customer sign-ff via email</td>
+													<td></td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>M3</td>
+													<td>Test plans, APIs, UX</td>
+													<td></td>
+													<td>01/10/2019</td>
+													<td>Working swagger.</td>
+													<td>30% of fee</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>M4</td>
+													<td>Customer QA testing</td>
+													<td>Supplier to deliver gold master deliverables.</td>
+													<td>02/11/2019</td>
+													<td>Test cases are conducted by customer.</td>
+													<td>20% of fee</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- / miletonse table -->
+
+
+							<!-- Chart -->
+							<div class="col-md-12 col-lg-12">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold">
+												<i class="icon-pie-chart2 mr-10"></i>Timeline</span>
+										</h6>
+									</div>
+									<div class="panel-body">
+										<div id="milestoneChart"></div>
+									</div>
+								</div>
+							</div>
+							<!-- / Chart -->
+						</div>
+
+					</div>
+					<!--  / Milestone TAB -->
+
+					<!--  Penalties TAB -->
+					<div class="tab-pane" id="penalties-tab">
+
+						<div class="mb-10">
+							<a href="#" class="btn bg-blue btn-labeled heading-btn"><b><i class="icon-task"></i></b>Add Penalty</a>
+						</div>
+
+						<div class="row">
+
+							<!--  table -->
+							<div class="col-md-12 col-lg-12">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold">
+												<i class="icon-cash3 mr-10"></i>Penalties</span>
+										</h6>
+									</div>
+									<div class="panel-body">
+										<table class="table table-bordered table-hover datatable-highlight">
+											<thead>
+												<tr>
+													<th>Case</th>
+													<th>Penalty Amount</th>
+													<th class="text-center"></th>
+												</tr>
+											</thead>
+											<tbody>
+
+												<tr>
+													<td>Deployment delay</td>
+													<td>&dollar; 10,000</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>Mismatch UX specifications</td>
+													<td>&dollar; 5,000</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>Milestone sequence (M1) delay</td>
+													<td>&dollar; 50,000</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+												<tr>
+													<td>Termination of contract</td>
+													<td>&dollar; 100,000</td>
+													<td class="text-center">
+														<ul class="icons-list">
+															<li class="dropdown">
+																<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-menu9"></i>
+																</a>
+																<ul class="dropdown-menu dropdown-menu-right">
+																	<li><a href="#"><i class="icon-pencil4"></i> Edit </a></li>
+																	<li><a href="#"><i class="icon-bell-check"></i> Manage Notifications</a></li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /  table -->
+
+						</div>
+
+					</div>
+					<!--  / Penalties TAB -->
+
+					<!--  Other TAB -->
+					<div class="tab-pane" id="other-tab">
+
+						<div class="row">
+
+							<div class="col-md-6 col-lg-6">
+								<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+									<div class="panel-heading">
+										<h6 class="panel-title"><span class="text-semibold">
+												<i class="icon-info3 mr-10"></i>Additional notes</span>
+										</h6>
+									</div>
+									<div class="panel-body">
+										<div class="form-group">
+											<textarea rows="3" type="text" placeholder="Add additional contract notes here.." class="form-control"></textarea>
+										</div>
+
+										<div class="pull-right">
+											<button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<!--  / other TAB -->
+
+				</div>
+				<!-- / TABS CONTENT -->
+
+
+				<!-- /main content -->
+
+			</div>
+			<!-- /page content -->
+
+		</div>
+		<!-- /page container -->
+
+
+		<!-- Footer -->
+		<div ng-include="'./reusable_components/footer.html'"></div>
+		<!-- /footer -->
+
+		<!-- Term Group modal -->
+		<div id="addTermGroup" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-info">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h6 class="modal-title">Add Terms Group</h6>
+					</div>
+
+					<div class="modal-body">
+						<h6 class="text-semibold">Group Title</h6>
+						<div class="form-group">
+							<input type="text" placeholder="Group Title" class="form-control">
+							<div class="form-control-feedback">
+								<i class="icon-pen"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Term Group modal -->
+
+		<!-- add Term modal -->
+		<div id="addTerm" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-info">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h6 class="modal-title">Add Term</h6>
+					</div>
+
+					<div class="modal-body">
+						<h6 class="text-semibold">Term Content</h6>
+						<div class="form-group">
+							<textarea rows="3" type="text" placeholder="Add term content here.." class="form-control"></textarea>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- / add Term  modal -->
+
+		<!-- templates modal -->
+		<div id="templatesList" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-info">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h6 class="modal-title">Add Template</h6>
+					</div>
+
+					<div class="modal-body">
+						<h6 class="text-semibold">Templates</h6>
+						<ul class="media-list content-group" style="max-height: 300px; overflow: auto;">
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task1">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Term of contract
+											<span class="text-muted text-size-small">(2 Topics)</span></label>
+									</h6>
+
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task2">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Independent contractor
+											<span class="text-muted text-size-small">(4 Topics)</span>
+										</label>
+									</h6>
+
+								</div>
+							</li>
+
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task3">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Termination Clause
+											<span class="text-muted text-size-small">(1 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task4">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Intellectual Property Clause
+											<span class="text-muted text-size-small">(3 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task5">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Contact Information Clause
+											<span class="text-muted text-size-small">(3 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task6">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Contact Information Clause
+											<span class="text-muted text-size-small">(5 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task7">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Payment Details Clause
+											<span class="text-muted text-size-small">(6 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task8">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Payment Details Clause
+											<span class="text-muted text-size-small">(4 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task9">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Third Party Content Clause
+											<span class="text-muted text-size-small">(9 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+									<input type="checkbox" class="styled" id="task10">
+								</div>
+								<div class="media-body">
+									<h6 class="media-heading">
+										<label for="task1" class="no-margin text-semibold cursor-pointer">Unacceptable Behavior Claus
+											<span class="text-muted text-size-small">(3 Topics)</span>
+										</label>
+									</h6>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Add Templates</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /templates modal -->
+
+		<!-- Primary modal -->
+		<div id="viewer" class="modal fade">
+			<div class="modal-dialog modal-full">
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h6 class="modal-title">Visual Tracking</h6>
+					</div>
+
+					<div class="modal-body">
+						<!-- src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&scrollbar=0" -->
+
+						<iframe
+							ng-src="{{trustSrc(currentViewFile)}}"
+							frameBorder="0"
+							scrolling="auto"
+							height="100%"
+							width="100%"></iframe>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /primary modal -->
+
+		<!-- Primary modal -->
+		<div id="none" class="modal fade">
+			<div class="modal-dialog modal-full">
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h6 class="modal-title">Visual Tracking</h6>
+					</div>
+
+					<div class="modal-body">
+
+						<!-- PRINT -->
+						<div id="print">
+
+							<div class="p-container">
+
+								<div class="p-section">
+									<div class="p-heading">General Info</div>
+									<div class="p-body">
+										<div class="panel panel-flat border-top-xlg border-top-blue">
+											<div class="panel-heading">
+												<h6 class="panel-title"><span class="text-semibold"><i class="icon-collaboration mr-10"></i>Parties</span></h6>
+											</div>
+
+											<div class="panel-body">
+												<div class="flex-row justify-center">
+													<div class="flex-column justify-center">
+														<i class="fa fa-bank"></i>
+														<div class="party_name">Everteam</div>
+														<div class="party_type">Enterprise Comp</div>
+													</div>
+													<div class="">
+														<img class="handshake" src="assets/images/icons8-handshake-100.png">
+													</div>
+													<div class="flex-column justify-center">
+														<i class="fa fa-bank"></i>
+														<div class="party_name">{{ contract.party }}</div>
+														<di class="party_type">Enterprise Comp</di>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="row flex">
+
+											<div class="col-md-6 col-lg-6">
+												<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+													<div class="panel-heading">
+														<h6 class="panel-title"><span class="text-semibold"><i class="icon-stack3 mr-10"></i> Contract Information</span> </h6>
+													</div>
+													<div class="panel-body contract_info_box">
+														<div>
+															<div class="contract_info_label">
+																ID
+															</div>
+															<span class="text-capitalize">{{displayId(contract.id)}}</span>
+														</div>
+														<div>
+															<div class="contract_info_label">
+																Agreement
+															</div>
+															<span class="text-capitalize">{{ contract.agreement }}</span>
+														</div>
+														<div>
+															<div class="contract_info_label">Amount</div>
+															<span>&dollar; {{ contract.amount | number}}</span>
+														</div>
+														<div>
+															<div class="contract_info_label">
+																Effective Date
+															</div>
+															<span>{{ contract.start  | date:'mediumDate' }}</span>
+														</div>
+														<div>
+															<div class="contract_info_label">
+																Expiration Date
+															</div>
+															<span>{{ contract.end  | date:'mediumDate' }}</span>
+														</div>
+
+														<div>
+															<div class="contract_info_label">
+																Sign-Off date
+															</div>
+															<span>{{ contract.sign_off  | date:'mediumDate' }}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6 col-lg-6">
+												<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+													<div class="panel-heading">
+														<h6 class="panel-title"><span class="text-semibold"><i class="icon-office mr-10"></i>Second party details</span> </h6>
+													</div>
+													<div class="panel-body contract_info_box">
+														<div>
+															<div class="contract_info_label">
+																Country
+															</div>
+															<span>Paris, France</span>
+														</div>
+														<div>
+															<div class="contract_info_label">
+																Street
+															</div>
+															<span>2269 Elba Lane</span>
+														</div>
+														<div>
+															<div class="contract_info_label">
+																Contact
+															</div>
+															<span>888-555-2311</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="p-section">
+									<div class="p-heading">Terms & Conditions</div>
+									<div class="p-body">
+										<div class="p-sub-heading text-semibold"> <i class="icon-comments mr-5"></i> Tax</div>
+										<ul>
+											<li> <i class="icon-arrow-right13 mr-5"></i> The Commonwealth is exempt from all excise taxes imposed by the Internal Revenue Service and has accordingly registered with the Internal Revenue Service to make tax free purchases under Registration No.
+												23740001-K.
+											</li>
+											<li> <i class="icon-arrow-right13 mr-5"></i> The Commonwealth is also exempt from Pennsylvania state sales tax, local sales tax, public transportation assistance taxes and fees and vehicle rental tax. The Department of Revenue regulations provide that
+												exemption certificates
+												are not required for sales made to
+												governmental entities and none will be issued. Nothing in this paragraph is meant to exempt a construction contractor from the payment of any of these taxes or fees
+											</li>
+										</ul>
+
+										<div class="p-sub-heading text-semibold"><i class="icon-comments mr-5"></i> Compliance with law</div>
+										<ul>
+											<li> <i class="icon-arrow-right13 mr-5"></i> The Contractor shall comply with all applicable federal and state laws and regulations and local ordinances in the performance of the Contract.
+											</li>
+										</ul>
+
+									</div>
+								</div>
+
+								<div class="p-section" style="margin-top: 60px; min-height: 5cm;">
+									<div class="p-heading">Scope of work</div>
+									<div class="p-body pl-20">
+										<strong> Planning and Requirements Gathering:</strong>
+										<div class="pl-15">o Complete requirements gathering and analysis of Hamad Bin Khalifa University requirements.</div>
+										<div class="pl-15">o Prepare Project Plan, Risk Mitigation Plan, Change Management Plan, Communication Plan and Stakeholder’s Availability.</div>
+
+										<br>
+
+										<strong> Licenses Installation and Implementation:</strong>
+										<div class="pl-15">o Check readiness of the Servers and Operating system licenses.</div>
+										<div class="pl-15">o Deploy and configure eversuite solutions on the production, and staging/ testing environments</div>
+
+										<br>
+
+										<strong> Configuration of eversuite.document</strong>
+										<div class="pl-15">o Documents Categories Configuration</div>
+										<div class="pl-15">o Security Context Definition (Groups, Roles, Security Rights)</div>
+										<div class="pl-15">o Configure Document Collaboration</div>
+										<div class="pl-15">o Configure Audit Timeline</div>
+										<div class="pl-15">o Configure Document Timeline</div>
+										<div class="pl-15">o Configure Indexing Engine</div>
+										<div class="pl-15">o Configure Reports</div>
+										<div class="pl-15">o Configure Alerts and Reminders</div>
+										<div class="pl-15">o Configure Document Search</div>
+										<div class="pl-15">o Configure Document Review Functionality</div>
+										<div class="pl-15">o Configure Office Online</div>
+										<div class="pl-15">o Enable E-mail Notifications</div>
+
+										<br>
+
+										<strong> Integration:</strong>
+										<div>Ever Gulf Co. provides a set of readymade connectors built with Restful APIs in order to connect with:</div>
+										<div class="pl-15">o Microsoft Active Directory</div>
+										<div class="pl-15">o Microsoft Office</div>
+										<div class="pl-15">o Banner Student Information System</div>
+										<div class="pl-15">o Canvas Learning Management System</div>
+										<div class="pl-15">o Sierra Library System</div>
+										<div class="pl-15">o QF ERP</div>
+										<div class="pl-15">o Oauth and SAML</div>
+										<div class="pl-15">o SharePoint</div>
+
+										<br>
+
+										<strong> Solution Language:</strong>
+										<div class="pl-15">All Solution modules to be available in both languages’ Arabic and English</div>
+
+										<br>
+
+										<strong> Deployment:</strong>
+										<div class="pl-15">Deploy the solution on Staging\Testing environment.</div>
+
+										<br>
+
+										<strong> Internal Testing:</strong>
+										<div class="pl-15">o Unit Testing</div>
+										<div class="pl-15">o Performance Testing</div>
+										<div class="pl-15">o Functional and Integration Testing</div>
+										<div class="pl-15">o System Testing</div>
+										<div class="pl-15">o Security Penetration Testing</div>
+
+
+									</div>
+								</div>
+
+								<div class="p-section mb-0" style="margin-top: 80px; min-height: 29.7cm;">
+									<div class="p-heading">Payments</div>
+									<div class="p-body">
+										<div class="row">
+											<div class=" col-md-12 col-lg-12">
+												<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+													<div class="panel-heading">
+														<h6 class="panel-title"><span class="text-semibold">
+																<i class="icon-cash3 mr-10"></i>Payments</span>
+														</h6>
+													</div>
+													<div class="panel-body">
+														<table class="table table-bordered table-hover datatable-highlight">
+															<thead>
+																<tr>
+																	<th>Date</th>
+																	<th>Type</th>
+																	<th>Amount</th>
+																</tr>
+															</thead>
+															<tbody>
+
+																<tr>
+																	<td>01/02/2019</td>
+																	<td>Cash</td>
+																	<td>&dollar; 30,000</td>
+																</tr>
+
+																<tr>
+																	<td>02/04/2019</td>
+																	<td>Bank transfer</td>
+																	<td>&dollar; 90,000</td>
+																</tr>
+
+																<tr>
+																	<td>02/06/2019</td>
+																	<td>Bank transfer</td>
+																	<td>&dollar; 120,000</td>
+																</tr>
+
+																<tr>
+																	<td>02/10/2019</td>
+																	<td>Bank transfer</td>
+																	<td>&dollar; 60,000</td>
+																</tr>
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="" style="margin-top: 10px;min-height: 8cm;">
+									<div class=" p-heading">Milestone</div>
+									<div class="p-body">
+										<div class="row">
+
+											<!-- miletonse table -->
+											<div class="col-md-12 col-lg-12">
+												<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+													<div class="panel-heading">
+														<h6 class="panel-title"><span class="text-semibold">
+																<i class="icon-git-branch mr-10"></i>Detailed Milestone</span>
+														</h6>
+													</div>
+													<div class="panel-body">
+														<table class="table table-bordered table-hover datatable-highlight">
+															<thead>
+																<tr>
+																	<th>Sequence</th>
+																	<th>Milestone</th>
+																	<th>Deliverable</th>
+																	<th>Delivery date</th>
+																	<th>Acceptnace criteria</th>
+																	<th>Payment</th>
+																</tr>
+															</thead>
+															<tbody>
+
+																<tr>
+																	<td>M1</td>
+																	<td>SOW Complete</td>
+																	<td>Excuted SOW</td>
+																	<td>02/03/2019</td>
+																	<td>Fully executed SOW</td>
+																	<td>50% of fee</td>
+																</tr>
+
+																<tr>
+																	<td>M2</td>
+																	<td>User stories</td>
+																	<td>Wireframes and none functional requirements.</td>
+																	<td>02/06/2019</td>
+																	<td>Customer sign-ff via email</td>
+																	<td></td>
+
+																</tr>
+
+																<tr>
+																	<td>M3</td>
+																	<td>Test plans, APIs, UX</td>
+																	<td></td>
+																	<td>01/10/2019</td>
+																	<td>Working swagger.</td>
+																	<td>30% of fee</td>
+																</tr>
+
+																<tr>
+																	<td>M4</td>
+																	<td>Customer QA testing</td>
+																	<td>Supplier to deliver gold master deliverables.</td>
+																	<td>02/11/2019</td>
+																	<td>Test cases are conducted by customer.</td>
+																	<td>20% of fee</td>
+																</tr>
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<!-- / miletonse table -->
+
+										</div>
+									</div>
+								</div>
+
+								<div class="" style="min-height: 21.7px;">
+									<div class="p-heading">Penalties</div>
+									<div class="p-body">
+										<!--  table -->
+										<div class="col-md-12 col-lg-12" style="display: contents;">
+											<div class="panel panel-flat border-top-xlg border-top-blue full_height">
+												<div class="panel-heading">
+													<h6 class="panel-title"><span class="text-semibold">
+															<i class="icon-cash3 mr-10"></i>Penalties</span>
+													</h6>
+												</div>
+												<div class="panel-body">
+													<table class="table table-bordered table-hover datatable-highlight">
+														<thead>
+															<tr>
+																<th>Case</th>
+																<th>Penalty Amount</th>
+															</tr>
+														</thead>
+														<tbody>
+
+															<tr>
+																<td>Deployment delay</td>
+																<td>&dollar; 10,000</td>
+															</tr>
+
+															<tr>
+																<td>Mismatch UX specifications</td>
+																<td>&dollar; 5,000</td>
+															</tr>
+
+															<tr>
+																<td>Milestone sequence (M1) delay</td>
+																<td>&dollar; 50,000</td>
+															</tr>
+
+															<tr>
+																<td>Termination of contract</td>
+																<td>&dollar; 100,000</td>
+															</tr>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!-- /  table -->
+									</div>
+								</div>
+
+								<div class="p-section" style="margin-top: 50px;">
+									<div class="p-heading">Other</div>
+									<div class="p-body ml-20">
+										Please refer to section Post Implementation Services & Maintenance and Support Appendix for more details about the maintenance and support services.
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- /  PRINT -->
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /primary modal -->
+
+		<script>
+
+			// Checkboxes/radios (Uniform)
+			// ------------------------------
+
+			// Default initialization
+			$(".styled, .multiselect-container input").uniform({
+				radioClass: 'choice'
+			});
+
+			// File input
+			$(".file-styled").uniform({
+				fileButtonClass: 'action btn bg-pink-400',
+				fileButtonHtml: '<i class="icon-plus2"></i>'
+			});
+
+			// Accordion component sorting
+			$(".accordion-sortable").sortable({
+				connectWith: '.accordion-sortable',
+				items: '.panel',
+				helper: 'original',
+				cursor: 'move',
+				handle: '[data-action=move]',
+				revert: 100,
+				containment: '.content-wrapper',
+				forceHelperSize: true,
+				placeholder: 'sortable-placeholder',
+				forcePlaceholderSize: true,
+				tolerance: 'pointer',
+				start: function (e, ui) {
+					ui.placeholder.height(ui.item.outerHeight());
+				}
+			});
+
+			// Collapsible component sorting
+			$(".collapsible-sortable").sortable({
+				connectWith: '.collapsible-sortable',
+				items: '.panel',
+				helper: 'original',
+				cursor: 'move',
+				handle: '[data-action=move]',
+				revert: 100,
+				containment: '.content-wrapper',
+				forceHelperSize: true,
+				placeholder: 'sortable-placeholder',
+				forcePlaceholderSize: true,
+				tolerance: 'pointer',
+				start: function (e, ui) {
+					ui.placeholder.height(ui.item.outerHeight());
+				}
+			});
+
+			// Defaults
+			Dropzone.autoDiscover = false;
+
+			// Multiple files
+			$("#dropzone_multiple").dropzone({
+				paramName: "file", // The name that will be used to transfer the file
+				dictDefaultMessage: 'Drop files to upload <span>or CLICK</span>',
+				autoProcessQueue: false,
+				maxFilesize: 3 // MB
+			});
+
+			var milestoneOptions = {
+				series: [
+					{
+						data: [
+							{
+								x: 'SOW Complete',
+								y: [
+									new Date('2019-03-02').getTime(),
+									new Date('2019-06-02').getTime()
+								]
+							},
+							{
+								x: 'User stories & wirefames',
+								y: [
+									new Date('2019-06-02').getTime(),
+									new Date('2019-10-02').getTime()
+								]
+							},
+							{
+								x: 'Test plans, APIs, UX',
+								y: [
+									new Date('2019-10-02').getTime(),
+									new Date('2019-11-02').getTime()
+								]
+							},
+							{
+								x: 'Customer QA testing',
+								y: [
+									new Date('2019-11-02').getTime(),
+									new Date('2019-12-18').getTime()
+								]
+							}
+						]
+					}
+				],
+				chart: {
+					height: 250,
+					type: 'rangeBar'
+				},
+				plotOptions: {
+					bar: {
+						horizontal: true
+					}
+				},
+				xaxis: {
+					type: 'datetime'
+				}
+			};
+
+			var chart = new ApexCharts(document.querySelector("#milestoneChart"), milestoneOptions);
+			chart.render();
+
+		</script>
+
+		<script>
+
+			var defaultProject = firebase.initializeApp(firebaseConfig);
+			var db = firebase.firestore();
+
+			var app = angular.module("sampleApp", []);
+			app.controller("SampleCtrl", function ($scope, $sce) {
+
+				$scope.currentViewFile = 'https://drive.google.com/viewerng/viewer?embedded=true&url=http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&scrollbar=0'
+
+				$scope.displayId = function (id) {
+					if (!id) return "OP-001"
+					var lastChar = id.substr(id.length - 4);
+					return "OP-" + lastChar;
+				};
+
+				let defaultContract = {
+					agreement: "Digital Mailroom",
+					amount: "200000",
+					start: new Date("04/14/2020"),
+					end: new Date("04/22/2022"),
+					id: "5ef1e2ee6a0f3707d2b414b6",
+					notes: "",
+					sign_off: new Date("2020-06-22T21:00:00.000Z"),
+					party: "Apple"
+				}
+
+				$scope.contract = defaultContract;
+
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				const id = urlParams.get('id')
+
+				if (id) {
+					var docRef = db.collection("contracts").doc(id);
+
+					docRef.get().then(function (doc) {
+
+						if (doc.exists) {
+							let contract_ = doc.data()
+
+							$scope.contract = {
+								agreement: contract_.agreement,
+								amount: contract_.amount,
+								start: new Date(contract_.start),
+								end: new Date(contract_.end),
+								id: contract_.id,
+								notes: contract_.notes,
+								sign_off: new Date(contract_.sign_off),
+								party: contract_.party,
+							}
+							$scope.$digest()
+
+
+							console.log("Document data:", contract_);
+						} else {
+							// doc.data() will be undefined in this case
+							console.log("No such document!");
+						}
+					}).catch(function (error) {
+						console.log("Error getting document:", error);
+					});
+				}
+
+				$scope.trustSrc = function (src) {
+					return $sce.trustAsResourceUrl(src);
+				}
+
+				$scope.openViewer = function (url) {
+					$scope.currentViewFile = url;
+					$('#viewer').modal("show")
+				}
+
+			});
+
+
+		</script>
+
+		<script>
+
+			$('#download_pdf').click(function () {
+				setTimeout(() => {
+					var element = document.getElementById('print');
+					var worker = html2pdf().from(element).save();
+				}, 500);
+			})
+
+		</script>
+
+</body>
+
+</html>

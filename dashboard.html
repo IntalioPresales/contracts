@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Contracts Management System</title>
+	<base href="./">
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/visualization/d3/d3.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/visualization/echarts/echarts.js"></script>
+
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/pages/dashboard.js"></script> -->
+	<script type="text/javascript" src="assets/js/custom/custom_dashboard.js"></script>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!-- /theme JS files -->
+
+</head>
+
+<body ng-app="">
+
+	<!-- Main navbar -->
+	<div ng-include="'./reusable_components/main_navbar.html'"></div>
+	<!-- /Main navbar -->
+
+	<!-- Second navbar -->
+	<div ng-include="'./reusable_components/second_navbar.html'"></div>
+	<!-- / Second navbar -->
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Dashboard</span> </h4>
+
+				<ul class="breadcrumb breadcrumb-caret position-right">
+					<li><a href="#">Dashboard</a></li>
+				</ul>
+			</div>
+
+			<div class="heading-elements">
+				<div class="heading-btn-group">
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<div class="row">
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body bg-blue-400 has-bg-image">
+							<div class="media no-margin-top content-group">
+								<div class="media-left media-middle">
+									<i class="icon-pulse2 icon-2x"></i>
+								</div>
+
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">All contracts</h6>
+									<span class="text-muted">12/50 Contract</span>
+								</div>
+							</div>
+
+							<div class="progress progress-micro mb-10 bg-success">
+								<div class="progress-bar bg-white" style="width: 85%">
+									<span class="sr-only">85% Achievement rate</span>
+								</div>
+							</div>
+							<span class="pull-right">85%</span>
+							Achievement rate
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body bg-success-400 has-bg-image">
+							<div class="media no-margin-top content-group">
+								<div class="media-left media-middle">
+									<i class="icon-pulse2 icon-2x"></i>
+								</div>
+
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">High priority contracts</h6>
+									<span class="text-muted">12/50 Contract</span>
+								</div>
+							</div>
+
+							<div class="progress progress-micro mb-10 bg-success">
+								<div class="progress-bar bg-white" style="width: 67%">
+									<span class="sr-only">67% Achievement rate</span>
+								</div>
+							</div>
+							<span class="pull-right">67%</span>
+							Achievement rate
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body bg-indigo-400 has-bg-image">
+							<div class="media no-margin-top content-group">
+								<div class="media-left media-middle">
+									<i class="icon-pulse2 icon-2x"></i>
+								</div>
+
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">Urgent contracts</h6>
+									<span class="text-muted">20/50 Contract</span>
+								</div>
+							</div>
+
+							<div class="progress progress-micro mb-10 bg-indigo">
+								<div class="progress-bar bg-white" style="width: 30%">
+									<span class="sr-only">30% Achievement rate</span>
+								</div>
+							</div>
+							<span class="pull-right">30%</span>
+							Achievement rate
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body bg-danger-400 has-bg-image">
+							<div class="media no-margin-top content-group">
+								<div class="media-left media-middle">
+									<i class="icon-pulse2 icon-2x"></i>
+								</div>
+
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">Delayed contracts</h6>
+									<span class="text-muted">8/50 Contract</span>
+								</div>
+							</div>
+
+							<div class="progress progress-micro mb-10 bg-danger">
+								<div class="progress-bar bg-white" style="width: 25%">
+									<span class="sr-only">25% Achievement rate</span>
+								</div>
+							</div>
+							<span class="pull-right">25%</span>
+							Achievement rate
+						</div>
+					</div>
+
+
+				</div>
+
+				<!-- Main charts -->
+				<div class="row">
+					<div class="col-lg-6">
+
+						<!-- Traffic sources -->
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h6 class="panel-title">Contract type distribution</h6>
+								<div class="heading-elements">
+									<form class="heading-form" action="#">
+										<div class="form-group">
+											<label class="checkbox-inline checkbox-switchery checkbox-right switchery-xs">
+												<input type="checkbox" class="switch" checked="checked">
+												Live update:
+											</label>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="chart-container has-scroll">
+									<div class="chart has-fixed-height has-minimum-width" id="pie_timeline"></div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /traffic sources -->
+
+					</div>
+
+					<div class="col-lg-6">
+
+						<!-- Sales stats -->
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h6 class="panel-title">Financial monitoring (ERP)</h6>
+								<div class="heading-elements">
+									<form class="heading-form" action="#">
+										<div class="form-group">
+											<select class="change-date select-sm" id="select_date">
+												<optgroup label="<i class='icon-watch pull-right'></i> Time period">
+													<option value="val1">June, 29 - July, 5</option>
+													<option value="val2">June, 22 - June 28</option>
+													<option value="val3" selected="selected">June, 15 - June, 21</option>
+													<option value="val4">June, 8 - June, 14</option>
+												</optgroup>
+											</select>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="container-fluid">
+								<div class="row text-center">
+									<div class="col-md-4">
+										<div class="content-group">
+											<h5 class="text-semibold no-margin"><i class="icon-calendar5 position-left text-slate"></i> 50,689</h5>
+											<span class="text-muted text-size-small">weekly</span>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="content-group">
+											<h5 class="text-semibold no-margin"><i class="icon-calendar52 position-left text-slate"></i> 320,568</h5>
+											<span class="text-muted text-size-small">monthly</span>
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="content-group">
+											<h5 class="text-semibold no-margin"><i class="icon-cash3 position-left text-slate"></i> $70,464</h5>
+											<span class="text-muted text-size-small">average revenue</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="content-group-sm" id="app_sales"></div>
+							<div id="monthly-sales-stats"></div>
+						</div>
+						<!-- /sales stats -->
+
+					</div>
+				</div>
+				<!-- /main charts -->
+
+
+				<!-- Dashboard content -->
+				<div class="row">
+					<div class="col-lg-8">
+
+						<!-- Marketing campaigns -->
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h6 class="panel-title">Timeline</h6>
+								<div class="heading-elements">
+									<span class="label bg-success heading-text">12 active</span>
+									<ul class="icons-list">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i> <span class="caret"></span></a>
+											<ul class="dropdown-menu dropdown-menu-right">
+												<li><a href="#"><i class="icon-sync"></i> Update data</a></li>
+												<li><a href="#"><i class="icon-list-unordered"></i> Detailed log</a></li>
+												<li><a href="#"><i class="icon-pie5"></i> Statistics</a></li>
+												<li class="divider"></li>
+												<li><a href="#"><i class="icon-cross3"></i> Clear list</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="table-responsive">
+								<table class="table table-lg text-nowrap">
+									<tbody>
+										<tr>
+											<td class="col-md-5">
+												<div class="media-left">
+													<div id="campaigns-donut"></div>
+												</div>
+
+												<div class="media-left">
+													<h5 class="text-semibold no-margin">38,289 <small class="text-success text-size-base"><i class="icon-arrow-up12"></i> (+16.2%)</small></h5>
+													<ul class="list-inline list-inline-condensed no-margin">
+														<li>
+															<span class="status-mark border-success"></span>
+														</li>
+														<li>
+															<span class="text-muted">May 12, 12:30 am</span>
+														</li>
+													</ul>
+												</div>
+											</td>
+
+											<td class="col-md-5">
+												<div class="media-left">
+													<div id="campaign-status-pie"></div>
+												</div>
+
+												<div class="media-left">
+													<h5 class="text-semibold no-margin">2,458 <small class="text-danger text-size-base"><i class="icon-arrow-down12"></i> (- 4.9%)</small></h5>
+													<ul class="list-inline list-inline-condensed no-margin">
+														<li>
+															<span class="status-mark border-danger"></span>
+														</li>
+														<li>
+															<span class="text-muted">Jun 4, 4:00 am</span>
+														</li>
+													</ul>
+												</div>
+											</td>
+
+											<td class="text-right col-md-2">
+												<a href="#" class="btn bg-indigo-300"><i class="icon-statistics position-left"></i> View report</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="table-responsive">
+								<table class="table text-nowrap">
+									<thead>
+										<tr>
+											<th>Second party</th>
+											<th class="col-md-2">Agreement</th>
+											<th class="col-md-2">Changes</th>
+											<th class="col-md-2">Budget</th>
+											<th class="col-md-2">Status</th>
+											<th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="active border-double">
+											<td colspan="5">August</td>
+											<td class="text-right">
+												<span class="progress-meter" id="today-progress" data-progress="30"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/facebook.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Facebook</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														02/08/2019 - 02/08/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Mintlime</span></td>
+											<td><span class="text-success-600"><i class="icon-stats-growth2 position-left"></i> 2.43%</span></td>
+											<td>
+												<h6 class="text-semibold">$500,000</h6>
+											</td>
+											<td><span class="label bg-blue">Active</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/youtube.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Youtube videos</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-danger position-left"></span>
+														02/08/2019 - 02/08/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">CDsoft</span></td>
+											<td><span class="text-success-600"><i class="icon-stats-growth2 position-left"></i> 3.12%</span></td>
+											<td>
+												<h6 class="text-semibold">$200,500</h6>
+											</td>
+											<td><span class="label bg-danger">Expired</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/spotify.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Spotify ads</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-grey-400 position-left"></span>
+														02/08/2019 - 02/08/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Diligence</span></td>
+											<td><span class="text-danger"><i class="icon-stats-decline2 position-left"></i> - 8.02%</span></td>
+											<td>
+												<h6 class="text-semibold">$100,268</h6>
+											</td>
+											<td><span class="label bg-grey-400">Hold</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/twitter.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Twitter ads</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-grey-400 position-left"></span>
+														08/08/2019 - 06/08/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Deluxe</span></td>
+											<td><span class="text-success-600"><i class="icon-stats-growth2 position-left"></i> 2.78%</span></td>
+											<td>
+												<h6 class="text-semibold">$700,467</h6>
+											</td>
+											<td><span class="label bg-grey-400">Active</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+
+										<tr class="active border-double">
+											<td colspan="5">July</td>
+											<td class="text-right">
+												<span class="progress-meter" id="yesterday-progress" data-progress="65"></span>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/bing.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Bing campaign</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-success position-left"></span>
+														02/07/2019 - 02/07/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Metrics</span></td>
+											<td><span class="text-danger"><i class="icon-stats-decline2 position-left"></i> - 5.78%</span></td>
+											<td>
+												<h6 class="text-semibold">$970,000</h6>
+											</td>
+											<td><span class="label bg-success-400">Pending</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropup">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/amazon.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Amazon ads</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-danger position-left"></span>
+														02/07/2019 - 02/07/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Blueish</span></td>
+											<td><span class="text-success-600"><i class="icon-stats-growth2 position-left"></i> 6.79%</span></td>
+											<td>
+												<h6 class="text-semibold">$100,540</h6>
+											</td>
+											<td><span class="label bg-blue">Renewal</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropup">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="media-left media-middle">
+													<a href="#"><img src="assets/images/brands/dribbble.png" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">Dribbble ads</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														04/07/2019 - 03/07/2020
+													</div>
+												</div>
+											</td>
+											<td><span class="text-muted">Teamable</span></td>
+											<td><span class="text-danger"><i class="icon-stats-decline2 position-left"></i> 9.83%</span></td>
+											<td>
+												<h6 class="text-semibold">$80,350</h6>
+											</td>
+											<td><span class="label bg-danger">rejected</span></td>
+											<td class="text-center">
+												<ul class="icons-list">
+													<li class="dropup">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<ul class="dropdown-menu dropdown-menu-right">
+															<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+															<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+															<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+															<li class="divider"></li>
+															<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- /marketing campaigns -->
+
+					</div>
+
+					<div class="col-lg-4">
+
+						<!-- Progress counters -->
+						<div class="row">
+							<div class="col-md-6">
+
+								<!-- Delivery failure -->
+								<div class="panel text-center">
+									<div class="panel-body">
+										<div class="heading-elements">
+											<ul class="icons-list">
+												<li class="dropdown text-muted">
+													<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i> <span class="caret"></span></a>
+													<ul class="dropdown-menu dropdown-menu-right">
+														<li><a href="#"><i class="icon-sync"></i> Update data</a></li>
+														<li><a href="#"><i class="icon-list-unordered"></i> Detailed log</a></li>
+														<li><a href="#"><i class="icon-pie5"></i> Statistics</a></li>
+														<li><a href="#"><i class="icon-cross3"></i> Clear list</a></li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+
+										<!-- Progress counter -->
+										<div class="content-group-sm svg-center position-relative" id="delivery_delayed_widget"></div>
+										<!-- /progress counter -->
+
+
+										<!-- Bars -->
+										<div id="hours-available-bars"></div>
+										<!-- /bars -->
+
+									</div>
+								</div>
+								<!-- / Delivery failure-->
+
+							</div>
+
+							<div class="col-md-6">
+
+								<!-- Delivered on time -->
+								<div class="panel text-center">
+									<div class="panel-body">
+										<div class="heading-elements">
+											<ul class="icons-list">
+												<li class="dropdown text-muted">
+													<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i> <span class="caret"></span></a>
+													<ul class="dropdown-menu dropdown-menu-right">
+														<li><a href="#"><i class="icon-sync"></i> Update data</a></li>
+														<li><a href="#"><i class="icon-list-unordered"></i> Detailed log</a></li>
+														<li><a href="#"><i class="icon-pie5"></i> Statistics</a></li>
+														<li><a href="#"><i class="icon-cross3"></i> Clear list</a></li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+
+										<!-- Progress counter -->
+										<div class="content-group-sm svg-center position-relative" id="ontime_widget"></div>
+										<!-- /progress counter -->
+
+										<!-- Bars -->
+										<div id="goal-bars"></div>
+										<!-- /bars -->
+
+									</div>
+								</div>
+								<!-- / Delivered on time -->
+
+							</div>
+						</div>
+						<!-- /progress counters -->
+
+						<div class="row">
+
+							<div class="col-md-6">
+								<!-- Progress arc - single color -->
+								<div class="panel panel-body text-center" style="min-height: 253px;">
+									<h6 class="text-semibold no-margin-bottom mt-5">Productivity Goal</h6>
+									<div class="text-size-small text-muted content-group-sm">49% average</div>
+
+									<div class="svg-center" id="arc_single"></div>
+								</div>
+								<!-- /progress arc - single color -->
+							</div>
+
+							<div class="col-md-6">
+								<!-- Rounded progress -->
+								<div class="panel panel-body text-center">
+									<h6 class="text-semibold no-margin-bottom mt-5">Avg. closure</h6>
+									<div class="text-size-small text-muted content-group-sm">August, 2019</div>
+
+									<div class="svg-center" id="rounded_progress_single"></div>
+								</div>
+								<!-- /rounded progress -->
+							</div>
+
+						</div>
+
+
+
+					</div>
+				</div>
+				<!-- /dashboard content -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+
+	<!-- Footer -->
+	<div ng-include="'./reusable_components/footer.html'"></div>
+	<!-- /footer -->
+
+</body>
+
+</html>
